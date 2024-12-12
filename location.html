@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Location Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background: white;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .container h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        .container span {
+            color: orangered;
+        }
+
+        .container p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 5px 140px;
+        }
+
+        .ret {
+            font-size: 0.875rem;
+            color: red;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        select {
+            width: 90%;
+            margin-left: 40px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .container button {
+            width: 90%;
+            padding: 15px;
+            background-color: black;
+            color: white;
+            font-size: 1.125rem;
+            margin-left: 40px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        .container button:hover {
+            background-color: orangered;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .container h1 {
+                font-size: 1.5rem;
+            }
+
+            .container p {
+                font-size: 0.875rem;
+                padding: 6px 6px;
+            }
+
+            select{
+                width: 90%;
+    margin-left: 17px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 2s ease-in-out;
+            }
+
+            .ret {
+                font-size: 0.75rem;
+            }
+
+            .container button {
+                width: 90%;
+                padding: 15px;
+                background-color: black;
+                color: white;
+                font-size: 1.125rem;
+                margin-left: 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s, transform 0.3s;
+                animation: fadeIn 2.5s ease-in-out;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <h1>CHOOSE <span>Location</span></h1>
+        <p>Please select your location to proceed with your order. Start by choosing your country from the dropdown
+            menu, followed by your city. Once selected, click the 'Set Location' button to confirm. This helps us ensure
+            accurate delivery details for your order.</p>
+        <select id="countrySelect" onchange="loadCities()">
+            <option value="">Select a Country</option>
+            <option value="Pakistan">Pakistan</option>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+        </select>
+        <p class="ret">Dear Customer, please enter only the capital of your country. Your exact location will be tracked
+            with your email.</p>
+        <select id="citySelect" disabled>
+            <option value="">Select a City</option>
+        </select>
+        <button onclick="setLocation()">Set Location</button>
+    </div>
+<br>
+<br>
+<br>
+    <script>
+        // Cities data for countries
+        const cities = {
+            Pakistan: ["Karachi", "Lahore", "Islamabad", "Peshawar", "Quetta"],
+            India: ["Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai"],
+            USA: ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix"]
+        };
+
+        // Function to load cities based on selected country
+        function loadCities() {
+            const countrySelect = document.getElementById("countrySelect");
+            const citySelect = document.getElementById("citySelect");
+            const selectedCountry = countrySelect.value;
+
+            // Clear previous cities
+            citySelect.innerHTML = '<option value="">Select a City</option>';
+
+            if (selectedCountry && cities[selectedCountry]) {
+                // Populate cities
+                cities[selectedCountry].forEach(city => {
+                    const option = document.createElement("option");
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+                citySelect.disabled = false; // Enable city dropdown
+            } else {
+                citySelect.disabled = true; // Disable city dropdown if no country selected
+            }
+        }
+
+        // Function to set location
+        function setLocation() {
+            const country = document.getElementById("countrySelect").value;
+            const city = document.getElementById("citySelect").value;
+
+            if (country && city) {
+                alert(`Location set to: ${city}, ${country}`);
+                window.open('cheakout.html')
+            } else {
+                alert("Please select both country and city.");
+            }
+        }
+    </script>
+</body>
+
+</html>

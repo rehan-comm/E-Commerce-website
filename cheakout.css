@@ -1,0 +1,55 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main{
+    width: 100vh;
+    margin-top: 50px;
+    height: 80vh;
+    display: block;
+    border: 2px solid black;
+}
+
+.main-up{
+    width: 90%;
+    height: 40%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.main-up img{
+    width: 100%;
+    height: 100%;
+}
+
+.main-down{
+    width: 90%;
+    height: 52%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.main-down input{
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+    border: 2px solid black;
+    margin-top: 20px;
+}
+
+.main-down button{
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: black;
+    margin-top: 20px;
+}
